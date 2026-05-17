@@ -20,7 +20,7 @@
 
 ```bash
 git clone https://github.com/squez/number-theory-algorithms.git
-cd algebra
+cd number-theory-algorithms
 ```
 
 ### 2. Создать виртуальное окружение
@@ -30,6 +30,7 @@ python -m venv .venv
 ```
 
 Активация:
+
 - **Windows:** `.venv\Scripts\activate`
 - **macOS / Linux:** `source .venv/bin/activate`
 
@@ -42,9 +43,5 @@ pip install -r requirements.txt
 ### 4. Запустить ноутбук
 
 ```bash
-marimo edit --watch notebook.py
+marimo edit notebook.py --watch
 ```
-
-Флаг `--watch` необходим, чтобы браузер видел изменения файла в реальном времени.
-
-После запуска Marimo автоматически откроет ноутбук в браузере.
