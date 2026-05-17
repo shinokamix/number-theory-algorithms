@@ -2,3 +2,5 @@ __marimo__/
 __pycache__/
 *.pyc
 .env
+.venv/
+.claude/
