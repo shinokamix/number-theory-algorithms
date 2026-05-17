@@ -658,5 +658,61 @@ def crt(remainders, moduli):
     return x % M
 
 
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ## Глава 2
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### 1. Деление полиномов над целостным кольцом.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### 2. Вычисления в простых конечных полях (произведение и возведение в степень через битовые операции).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### 3. Построить поле GF(256).
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### 4. Нахождение неприводимых полиномов в конечном поле.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### 5. Решение алгебраических уравнений второй степени в конечных полях.
+    """)
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
+    ### 6. Вычисление дискретных логарифмов в конечных полях.
+    """)
+    return
+
+
 if __name__ == "__main__":
     app.run()
