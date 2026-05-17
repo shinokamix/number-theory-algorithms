@@ -615,13 +615,6 @@ def _(mo):
 
     ---
 
-    #### Почему это работает?
-
-    Каждое слагаемое $r_i \cdot M_i \cdot y_i$ обнуляется по всем модулям $m_j,\ j \neq i$
-    (так как $m_j \mid M_i$), а по модулю $m_i$ даёт ровно $r_i$, потому что $M_i \cdot y_i \equiv 1 \pmod{m_i}$.
-
-    ---
-
     #### Оценка сложности
     | Параметр | Значение |
     |----------|----------|
@@ -633,34 +626,36 @@ def _(mo):
 
 @app.function
 def crt(remainders, moduli):
-    # Проверяем попарную взаимную простоту модулей
     k = len(moduli)
+
+    # Проверяем попарную взаимную простоту модулей
     for i in range(k):
         for j in range(i + 1, k):
             if gcd(moduli[i], moduli[j]) != 1:
                 return None
 
-    # M = m₁ · m₂ · ... · mₖ
+    # Шаг 1: M = m₁ · m₂ · ... · mₖ
     M = 1
-    for m in moduli:
-        M *= m
+    for i in range(k):
+        M *= moduli[i]
 
+    # Шаги 2–4: для каждого i накапливаем слагаемое rᵢ · Mᵢ · yᵢ
     x = 0
-    for r, m in zip(remainders, moduli):
-        Mi = M // m
-        # Обратный к Mi по модулю m
-        _, yi, _ = extended_gcd(Mi, m)
-        yi = yi % m
-        x += r * Mi * yi
+    for i in range(k):
+        ri = remainders[i]
+        mi = moduli[i]
+
+        # Шаг 2: частичное произведение Mᵢ = M / mᵢ
+        Mi = M // mi
+
+        # Шаг 3: обратный элемент yᵢ ≡ Mᵢ⁻¹ (mod mᵢ)
+        _, yi, _ = extended_gcd(Mi, mi)
+        yi = yi % mi
+
+        # Шаг 4: добавляем слагаемое
+        x += ri * Mi * yi
 
     return x % M
-
-
-@app.cell
-def _():
-    # x ≡ 2 (mod 3), x ≡ 3 (mod 5), x ≡ 2 (mod 7)  →  x = 23
-    crt([2, 3, 2], [3, 5, 7])
-    return
 
 
 if __name__ == "__main__":
